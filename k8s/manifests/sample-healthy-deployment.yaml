@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: healthy-app
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: healthy-app
+  template:
+    metadata:
+      labels:
+        app: healthy-app
+    spec:
+      containers:
+        - name: healthy-app
+          image: nginx:stable
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "128Mi"
+          ports:
+            - containerPort: 80
