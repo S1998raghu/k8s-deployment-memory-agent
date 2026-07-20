@@ -14,9 +14,10 @@ def _build_prompt(incident_description, similar_incidents):
     if similar_incidents:
         history_lines = []
         for inc in similar_incidents:
+            trust = "confirmed working" if inc.get("fix_status") == "confirmed" else "unverified, LLM-suggested"
             history_lines.append(
                 f"- [{inc['issue_type']}] {inc['description']}\n"
-                f"  Previous fix: {inc['suggested_fix'] or 'none recorded'}"
+                f"  Previous fix ({trust}): {inc['suggested_fix'] or 'none recorded'}"
             )
         history_text = "\n".join(history_lines)
     else:

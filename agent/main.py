@@ -24,7 +24,12 @@ def run(namespace):
 
         embedding = embed_text(incident["description"])
 
-        similar = find_similar_incidents(conn, embedding, limit=3)
+        similar = find_similar_incidents(
+            conn, embedding,
+            resource_kind=incident["resource_kind"],
+            issue_type=incident["issue_type"],
+            limit=3,
+        )
         print(f"Found {len(similar)} similar past incident(s).")
 
         fix = suggest_fix(incident["description"], similar)

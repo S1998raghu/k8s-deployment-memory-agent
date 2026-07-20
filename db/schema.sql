@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS incidents (
     raw_details JSONB,
     embedding VECTOR(1024),
     suggested_fix STRING,
+    fix_status STRING NOT NULL DEFAULT 'llm_suggested',
     created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
